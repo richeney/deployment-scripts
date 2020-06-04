@@ -6,7 +6,7 @@ Small repo to demonstrate the new deployment script functionality in ARM.
 
 Reference: <https://docs.microsoft.com/azure/azure-resource-manager/templates/deployment-script-template?tabs=CLI>
 
-The reference documentation covers Bash v PowerShell and
+The reference documentation covers Bash v PowerShell and inline v uri.
 
 ## Instructions
 
@@ -22,7 +22,9 @@ The script shows the az commands as it runs.
 
 ## Gotchas
 
-Using inline scripts is painful. Use scriptUris.
+Using inline scripts is painful. (Worked for me once I'd used the JSON Tools extension which moved the multi-lines to one long string with \n.)
+
+The example uses scriptUris.
 
 ## Upcoming changes
 
