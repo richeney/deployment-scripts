@@ -1,0 +1,62 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "managed_identity": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string",
+      "defaultValue": "'Joe Bloggs'"
+    },
+    "utcValue": {
+      "type": "string",
+      "defaultValue": "[utcNow()]"
+    },
+    "script": {
+      "type": "string",
+      "metadata": {
+        "description": "Path to script within the repo."
+      },
+      "defaultValue": "scripts/hello.ps1"
+    },
+    "repoUri": {
+      "type": "string",
+      "defaultValue": "https://github.com/richeney/deployment-scripts"
+    }
+  },
+  "variables": {
+    "primaryScriptUri": "[concat(replace(parameters('repoUri'), 'github.com', 'raw.githubusercontent.com'), '/master/', parameters('script'))]"
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Resources/deploymentScripts",
+      "apiVersion": "2019-10-01-preview",
+      "name": "runPowerShellInlineWithOutput",
+      "location": "[resourceGroup().location]",
+      "kind": "AzurePowerShell",
+      "identity": {
+        "type": "userAssigned",
+        "userAssignedIdentities": {
+          "[parameters('managed_identity')]": {}
+        }
+      },
+      "properties": {
+        "forceUpdateTag": "[parameters('utcValue')]",
+        "azPowerShellVersion": "3.0",
+        "arguments": "[concat('-name ', parameters('name'))]",
+        "primaryScriptUri": "[variables('primaryScriptUri')]",
+        "environmentVariables": [],
+        "timeout": "PT1H",
+        "cleanupPreference": "OnSuccess",
+        "retentionInterval": "P1D"
+      }
+    }
+  ],
+  "outputs": {
+    "result": {
+      "value": "[reference('runPowerShellInlineWithOutput').outputs.text]",
+      "type": "string"
+    }
+  }
+}

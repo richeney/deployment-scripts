@@ -1,0 +1,12 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "managed_identity": {
+      "value": "/subscriptions/2d31be49-d959-4415-bb65-8aec2c90ba62/resourcegroups/deployment_scripts/providers/Microsoft.ManagedIdentity/userAssignedIdentities/scripts_msi"
+    },
+    "name": {
+      "value": "'richeney'"
+    }
+  }
+}
