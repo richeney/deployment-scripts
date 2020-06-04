@@ -22,12 +22,6 @@ The script shows the az commands as it runs.
 
 ## Gotchas
 
-Using inline scripts is painful. (Worked for me once I'd used the JSON Tools extension which moved the multi-lines to one long string with \n.)
+Using inline scripts is more painful. (Worked for me once I'd used the JSON Tools extension which moved the multi-lines to one long string with \n.)
 
 The example uses scriptUris.
-
-## Upcoming changes
-
-This template generates a temporary container and storage account.
-
-I think it will run faster with dedicated resources and references to them.
