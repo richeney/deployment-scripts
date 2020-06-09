@@ -40,7 +40,7 @@ then jq . < example_parameters.json
 else cat example_parameters.json
 fi
 
-az deployment group validate --name deployment_scripts --resource-group $resource_group_name --template-file example.json --parameters "@example_parameters.json" --verbose
+az deployment group create --name deployment_scripts --resource-group $resource_group_name --template-file example.json --parameters "@example_parameters.json" --verbose
 
 set +x
 exit 0
